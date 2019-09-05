@@ -1,0 +1,113 @@
+= mktree(1)
+Giacomo Comitti
+v0.1, 05.09.2019
+:doctype: manpage
+:manmanual: MKTREE
+:mansource: MKTREE
+
+== Name
+
+mktree - a simple tool for creating directory trees in one shot
+
+== Synopsis
+
+*mktree* [OPTIONS] [TREE_DESCRIPTION]
+
+== Options
+
+*-h*::
+	Print help information.
+
+*-V*::
+	Print version information.
+
+*-v*::
+	Print a message for each created directory.
+
+*-p*::
+	Preview the directory tree as a list of directories.
+
+*-P*::
+	Preview the directory tree.
+
+*-i*::
+	Ask before creating the directory tree. Implies `-p`.
+
+== Basic Usage
+
+The _TREE_DESCRIPTION_ is a string made up of directory names and three special
+characters that control how the tree is going to be created:
+
+*/* makes sure the following directories are created inside the previous one.
+
+*,* makes sure the following directories are created at the same level of the
+previous one.
+
+*.* moves one level up the directory tree and makes sure the following
+directories are created there. Can be used multiple times to move up multiple
+levels.
+
+=== Examples
+
+----
+$ mktree -P A
+.
+└── A
+
+$ mktree -P A/B
+.
+└── A
+    └── B
+
+$ mktree -P A/B,C
+.
+└── A
+    ├── B
+    └── C
+
+$ mktree -P A/B,C.F
+.
+└── A
+│   ├── B
+│   └── C
+└── F
+
+$ mktree -P A/B/C,D..E/F.H
+.
+├─ A
+│  └─ B
+│     ├─ C
+│     └─ D
+├─ E
+│  └─ F
+└─ H
+----
+
+== License
+
+See link:LICENSE.txt[].
+== Resources
+
+*Project site:* https://github.com/gcmt/mktree
+
+== License
+
+Copyright (C) 2019 {author}. +
+
+Permission is hereby granted, free of charge, to any person obtaining a copy
+of this software and associated documentation files (the "Software"), to deal
+in the Software without restriction, including without limitation the rights
+to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
+copies of the Software, and to permit persons to whom the Software is
+furnished to do so, subject to the following conditions:
+
+The above copyright notice and this permission notice shall be included in all
+copies or substantial portions of the Software.
+
+THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
+AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
+LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
+OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
+SOFTWARE.

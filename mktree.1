@@ -1,0 +1,136 @@
+'\" t
+.\"     Title: mktree
+.\"    Author: Giacomo Comitti
+.\" Generator: DocBook XSL Stylesheets vsnapshot <http://docbook.sf.net/>
+.\"      Date: 05.09.2019
+.\"    Manual: MKTREE
+.\"    Source: MKTREE 0.1
+.\"  Language: English
+.\"
+.TH "MKTREE" "1" "05\&.09\&.2019" "MKTREE 0\&.1" "MKTREE"
+.\" -----------------------------------------------------------------
+.\" * Define some portability stuff
+.\" -----------------------------------------------------------------
+.\" ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+.\" http://bugs.debian.org/507673
+.\" http://lists.gnu.org/archive/html/groff/2009-02/msg00013.html
+.\" ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+.ie \n(.g .ds Aq \(aq
+.el       .ds Aq '
+.\" -----------------------------------------------------------------
+.\" * set default formatting
+.\" -----------------------------------------------------------------
+.\" disable hyphenation
+.nh
+.\" disable justification (adjust text to left margin only)
+.ad l
+.\" -----------------------------------------------------------------
+.\" * MAIN CONTENT STARTS HERE *
+.\" -----------------------------------------------------------------
+.SH "NAME"
+mktree \- a simple tool for creating directory trees in one shot
+.SH "SYNOPSIS"
+.sp
+\fBmktree\fR [OPTIONS] [TREE_DESCRIPTION]
+.SH "OPTIONS"
+.PP
+\fB\-h\fR
+.RS 4
+Print help information\&.
+.RE
+.PP
+\fB\-V\fR
+.RS 4
+Print version information\&.
+.RE
+.PP
+\fB\-v\fR
+.RS 4
+Print a message for each created directory\&.
+.RE
+.PP
+\fB\-p\fR
+.RS 4
+Preview the directory tree as a list of directories\&.
+.RE
+.PP
+\fB\-P\fR
+.RS 4
+Preview the directory tree\&.
+.RE
+.PP
+\fB\-i\fR
+.RS 4
+Ask before creating the directory tree\&. Implies
+\-p\&.
+.RE
+.SH "BASIC USAGE"
+.sp
+The \fITREE_DESCRIPTION\fR is a string made up of directory names and three special characters that control how the tree is going to be created:
+.sp
+\fB/\fR makes sure the following directories are created inside the previous one\&.
+.sp
+\fB,\fR makes sure the following directories are created at the same level of the previous one\&.
+.sp
+\fB\&.\fR moves one level up the directory tree and makes sure the following directories are created there\&. Can be used multiple times to move up multiple levels\&.
+.SS "Examples"
+.sp
+.if n \{\
+.RS 4
+.\}
+.nf
+$ mktree \-P A
+\&.
+└── A
+
+$ mktree \-P A/B
+\&.
+└── A
+    └── B
+
+$ mktree \-P A/B,C
+\&.
+└── A
+    ├── B
+    └── C
+
+$ mktree \-P A/B,C\&.F
+\&.
+└── A
+│   ├── B
+│   └── C
+└── F
+
+$ mktree \-P A/B/C,D\&.\&.E/F\&.H
+\&.
+├─ A
+│  └─ B
+│     ├─ C
+│     └─ D
+├─ E
+│  └─ F
+└─ H
+.fi
+.if n \{\
+.RE
+.\}
+.SH "LICENSE"
+.sp
+See LICENSE\&.txt\&. == Resources
+.sp
+\fBProject site:\fR https://github\&.com/gcmt/mktree
+.SH "LICENSE"
+.sp
+Copyright \(co 2019 Giacomo Comitti\&.
+.sp
+Permission is hereby granted, free of charge, to any person obtaining a copy of this software and associated documentation files (the "Software"), to deal in the Software without restriction, including without limitation the rights to use, copy, modify, merge, publish, distribute, sublicense, and/or sell copies of the Software, and to permit persons to whom the Software is furnished to do so, subject to the following conditions:
+.sp
+The above copyright notice and this permission notice shall be included in all copies or substantial portions of the Software\&.
+.sp
+THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT\&. IN NO EVENT SHALL THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE\&.
+.SH "AUTHOR"
+.PP
+\fBGiacomo Comitti\fR
+.RS 4
+Author.
+.RE
