@@ -16,6 +16,7 @@ setup(
     author_email="dev@gcomit.com",
     url="https://github.com/gcmt/mktree",
     scripts=["mktree"],
+    data_files=[("man/man1", ["mktree.1"])],
     python_requires='>=3.6',
     classifiers=[
         "Development Status :: 4 - Beta",
