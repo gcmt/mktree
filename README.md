@@ -98,8 +98,8 @@ $ mktree -P A/B,C.D
 └── D
 ```
 
-You can use the `.` character as much as you want but you can't move outside the
-current working directory directory
+You can use many `.` characters in sequence to move up multiple levels, but you
+won't be able to move outside the current working directory
 
 ```
 $ mktree -P A/B/C,D..E/F...H
