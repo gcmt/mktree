@@ -16,6 +16,7 @@ setup(
     author_email="dev@gcomit.com",
     url="https://github.com/gcmt/mktree",
     scripts=["mktree"],
+    python_requires='>=3.6',
     classifiers=[
         "Development Status :: 4 - Beta",
         "License :: OSI Approved :: MIT License",
