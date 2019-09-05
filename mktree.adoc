@@ -1,6 +1,6 @@
 = mktree(1)
 Giacomo Comitti
-v0.1, 05.09.2019
+v0.1.1, 05.09.2019
 :doctype: manpage
 :manmanual: MKTREE
 :mansource: MKTREE
