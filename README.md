@@ -33,7 +33,7 @@ _mktree_ allows you to create complex directory trees with a simple syntax
  │   └── a
  ├── bunch
  └── of
-	  └── directories
+     └── directories
 ```
 
 Th ``-P`` flag makes sure we are given a preview of the directory tree without
