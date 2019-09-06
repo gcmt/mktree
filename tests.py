@@ -20,6 +20,12 @@ class TestDirTree(unittest.TestCase):
         eq(load("a/b/c,d..e/f"), ["a/b/c", "a/b/d", "e/f"])
         eq(load("a/b/c,d..e/f.g.h"), ["a/b/c", "a/b/d", "e/f", "g", "h"])
 
+        eq(load("a//b,c"), ["a/b", "a/c"])
+        eq(load("a/b,,c"), ["a/b", "a/c"])
+        eq(load("a/b,c.."), ["a/b", "a/c"])
+        eq(load("a/,."), ["a"])
+        eq(load("/,.a"), ["a"])
+
 
 if __name__ == "__main__":
     unittest.main()
