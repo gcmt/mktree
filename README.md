@@ -113,6 +113,22 @@ $ mktree -P A/B/C,D..E/F...H
 └─ H
 ```
 
+Since _mktree_ can take many tree descriptions as arguments, to avoid using `.`
+multiple times in sequence to reach the root directory, you can simply start
+another argument. The above example can in fact be rewritten as:
+
+```
+$ mktree -P A/B/C,D E/F H
+.
+├─ A
+│  └─ B
+│     ├─ C
+│     └─ D
+├─ E
+│  └─ F
+└─ H
+```
+
 License
 -------
 

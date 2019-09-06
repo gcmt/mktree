@@ -14,17 +14,21 @@ class TestDirTree(unittest.TestCase):
         def eq(a, b):
             self.assertEqual(set(a), set(b))
 
-        eq(load("a/b"), ["a/b"])
-        eq(load("a/b,c"), ["a/b", "a/c"])
-        eq(load("a/b,c.d"), ["a/b", "a/c", "d"])
-        eq(load("a/b/c,d..e/f"), ["a/b/c", "a/b/d", "e/f"])
-        eq(load("a/b/c,d..e/f.g.h"), ["a/b/c", "a/b/d", "e/f", "g", "h"])
+        eq(load(["a/b"]), ["a/b"])
+        eq(load(["a/b,c"]), ["a/b", "a/c"])
+        eq(load(["a/b,c.d"]), ["a/b", "a/c", "d"])
+        eq(load(["a/b/c,d..e/f"]), ["a/b/c", "a/b/d", "e/f"])
+        eq(load(["a/b/c,d..e/f.g.h"]), ["a/b/c", "a/b/d", "e/f", "g", "h"])
 
-        eq(load("a//b,c"), ["a/b", "a/c"])
-        eq(load("a/b,,c"), ["a/b", "a/c"])
-        eq(load("a/b,c.."), ["a/b", "a/c"])
-        eq(load("a/,."), ["a"])
-        eq(load("/,.a"), ["a"])
+        eq(load(["a", "b"]), ["a", "b"])
+        eq(load(["a/b", "c,d"]), ["a/b", "c", "d"])
+        eq(load(["a/b,c", "d/e,f.g"]), ["a/b", "a/c", "d/e", "d/f", "g"])
+
+        eq(load(["a//b,c"]), ["a/b", "a/c"])
+        eq(load(["a/b,,c"]), ["a/b", "a/c"])
+        eq(load(["a/b,c.."]), ["a/b", "a/c"])
+        eq(load(["a/,."]), ["a"])
+        eq(load(["/,.a"]), ["a"])
 
 
 if __name__ == "__main__":

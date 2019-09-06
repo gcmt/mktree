@@ -15,29 +15,30 @@ class DirTree:
         self.children = []
 
     @staticmethod
-    def load(description):
+    def load(descriptions):
         """Builds the directory tree from the given description.
 
         Args:
-            description (str): The tree string description. (e.g "foo/bar,baz.quux".)
+            descriptions (list): A list of tree string descriptions.
 
         Returns:
             The directory tree.
         """
         root = DirTree("")
-        current = root
-        for token in re.split("([,./])", description):
-            if not token or token == ",":
-                continue
-            elif token == "/":
-                if current.children:
-                    current = current.children[-1]
-            elif token == ".":
-                if current.parent:
-                    current = current.parent
-            else:
-                node = DirTree(os.path.join(current.path, token), parent=current)
-                current.children.append(node)
+        for description in descriptions:
+            current = root
+            for token in re.split("([,./])", description):
+                if not token or token == ",":
+                    continue
+                elif token == "/":
+                    if current.children:
+                        current = current.children[-1]
+                elif token == ".":
+                    if current.parent:
+                        current = current.parent
+                else:
+                    node = DirTree(os.path.join(current.path, token), parent=current)
+                    current.children.append(node)
         return root
 
     def __iter__(self):
@@ -101,11 +102,11 @@ def parse_args():
         help="Ask before creating the directory tree. Implies -p.",
     )
     parser.add_argument(
-        "tree_description",
-        metavar="TREE_DESCRIPTION",
-        nargs="?",
+        "trees",
+        metavar="TREE",
+        nargs="+",
         default="",
-        help="The directory tree descrtiption.",
+        help="The directory tree description.",
     )
     return parser.parse_args()
 
@@ -131,7 +132,7 @@ def make_tree(tree, verbose=False):
 def main():
 
     args = parse_args()
-    tree = DirTree.load(args.tree_description)
+    tree = DirTree.load(args.trees)
 
     if args.i:
         print_tree(tree, pretty=args.P)

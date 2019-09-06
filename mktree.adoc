@@ -11,7 +11,7 @@ mktree - a simple tool for creating directory trees in one shot
 
 == Synopsis
 
-*mktree* [OPTIONS] [TREE_DESCRIPTION]
+*mktree* [OPTIONS] TREE [TREE ...]
 
 == Options
 
