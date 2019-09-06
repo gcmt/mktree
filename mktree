@@ -42,12 +42,13 @@ class DirTree:
 
     def __iter__(self):
         """Returns all the directory tree paths (leaves). """
-        unvisited = list(self.children)
+        unvisited = list(reversed(self.children))
         while unvisited:
-            current = unvisited.pop(0)
-            if not current.children:
+            current = unvisited.pop()
+            if current.children:
+                unvisited.extend(reversed(current.children))
+            else:
                 yield current.path
-            unvisited.extend(current.children)
 
     def pprint(self):
         """Pretty-print the directory tree."""
