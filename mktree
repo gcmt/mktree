@@ -9,9 +9,9 @@ __version__ = "0.1.1"
 
 
 class DirTree:
-    def __init__(self, name, parent=None):
+    def __init__(self, path, parent=None):
+        self.path = path
         self.parent = parent
-        self.name = name
         self.children = []
 
     @staticmethod
@@ -24,7 +24,7 @@ class DirTree:
         Returns:
             The directory tree.
         """
-        root = DirTree(os.getcwd())
+        root = DirTree("")
         current = root
         for token in re.split("([,./])", description):
             if not token or token == ",":
@@ -36,7 +36,7 @@ class DirTree:
                 if current.parent:
                     current = current.parent
             else:
-                node = DirTree(token, parent=current)
+                node = DirTree(os.path.join(current.path, token), parent=current)
                 current.children.append(node)
         return root
 
@@ -46,21 +46,8 @@ class DirTree:
         while unvisited:
             current = unvisited.pop(0)
             if not current.children:
-                yield current.path()
+                yield current.path
             unvisited.extend(current.children)
-
-    def path(self):
-        """Returns the path of the current directory.
-
-        Returns:
-            The directory path relative to the root node.
-        """
-        elements = []
-        current = self
-        while current.parent:
-            elements.insert(0, current.name)
-            current = current.parent
-        return os.path.join(*elements)
 
     def pprint(self):
         """Pretty-print the directory tree."""
@@ -73,7 +60,7 @@ class DirTree:
             if dir.parent:
                 curr_padding = padding + ("└─ " if last_child else "├─ ")
                 next_padding = padding + ("   " if last_child else "│  ")
-                print(curr_padding + dir.name)
+                print(curr_padding + os.path.basename(dir.path))
             elif dir.children:
                 print(".")
 
@@ -83,10 +70,10 @@ class DirTree:
         _pprint(self, "", 0)
 
     def __str__(self):
-        return f"<{self.__class__.__name__} {self.name}>"
+        return f"<{self.__class__.__name__} {self.path}>"
 
     def __repr__(self):
-        return f"{self.__class__.__name__}(name={self.name!r})"
+        return f"{self.__class__.__name__}(path={self.path!r})"
 
 
 def parse_args():
