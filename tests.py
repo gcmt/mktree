@@ -30,6 +30,13 @@ class TestDirTree(unittest.TestCase):
         eq(load(["a/,."]), ["a"])
         eq(load(["/,.a"]), ["a"])
 
+        eq(load([r"foo\,bar"]), ["foo,bar"])
+        eq(load([r"foo\\,bar"]), ["foo\\", "bar"])
+        eq(load([r"foo\bar,baz"]), [r"foobar", "baz"])
+        eq(load([r"foo\\bar,baz"]), [r"foo\bar", "baz"])
+        eq(load([r"foo\\\bar,baz"]), [r"foo\bar", "baz"])
+        eq(load([r"foo\\\\bar,baz"]), [r"foo\\bar", "baz"])
+
 
 if __name__ == "__main__":
     unittest.main()

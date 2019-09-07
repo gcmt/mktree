@@ -81,6 +81,11 @@ $ mktree -P A/B/C,D..E/F.H
 ├─ E
 │  └─ F
 └─ H
+
+$ mktree -P A\\,B,C
+.
+├─ A,B
+└─ C
 ----
 
 == Resources

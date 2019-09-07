@@ -15,6 +15,33 @@ class DirTree:
         self.children = []
 
     @staticmethod
+    def tokenize(string):
+        """Returns a list of tokens separated by one of . , or /"""
+        token = ""
+        escape = ""
+        for i, char in enumerate(string):
+            if i == len(string) - 1:
+                yield token + char
+            elif char in (".", ",", "/"):
+                if escape:
+                    token += char
+                    escape = ""
+                else:
+                    yield token
+                    yield char
+                    token = ""
+                    escape = ""
+            elif char == "\\":
+                if escape:
+                    token += char
+                    escape = ""
+                else:
+                    escape += char
+            else:
+                token += char
+                escape = ""
+
+    @staticmethod
     def load(descriptions):
         """Builds the directory tree from the given description.
 
@@ -27,7 +54,7 @@ class DirTree:
         root = DirTree("")
         for description in descriptions:
             current = root
-            for token in re.split("([,./])", description):
+            for token in DirTree.tokenize(description):
                 if not token or token == ",":
                     continue
                 elif token == "/":

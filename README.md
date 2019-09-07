@@ -129,6 +129,15 @@ $ mktree -P A/B/C,D E/F H
 └─ H
 ```
 
+**Note**: you can escape `.` or `,` if you'll ever need to use them as part of a directory name:
+
+```
+$ mktree -P A\\,B,C
+.
+├─ A,B
+└─ C
+```
+
 License
 -------
 
