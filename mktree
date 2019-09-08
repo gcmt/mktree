@@ -31,12 +31,8 @@ class DirTree:
                     yield char
                     token = ""
                     escape = ""
-            elif char == "\\":
-                if escape:
-                    token += char
-                    escape = ""
-                else:
-                    escape += char
+            elif char == "\\" and not escape:
+                escape += char
             else:
                 token += char
                 escape = ""
