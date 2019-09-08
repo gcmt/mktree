@@ -1,9 +1,9 @@
 mktree
 ======
 
-_mktree_ is a simple tool for creating directory trees in one shot. This
-is somewhat similar to what the `mkdir` unix command can do, but with an
-easier syntax and better usability.
+_mktree_ is a simple tool for creating directory trees in one shot. It's
+somewhat similar to what you can do with `mkdir` and brace expansion, but with
+an easier syntax and better usability.
 
 Installation
 ------------
@@ -37,9 +37,8 @@ _mktree_ allows you to create complex directory trees with a simple syntax
 ```
 
 Th ``-P`` flag makes sure we are given a preview of the directory tree without
-actually creating any directory. For a simpler preview of all the directories
-that are going to be created, use the `-p` flag instead. A confirmation prompt
-is available with the `-i` flag.
+actually creating any directory. For a simpler list-like preview, use the `-p`
+flag instead. A confirmation prompt is also available by using the `-i` flag.
 
 You can find a complete list of all the available options [here](mktree.adoc).
 
