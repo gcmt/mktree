@@ -157,25 +157,18 @@ def main():
     args = parse_args()
     tree = DirTree.load(args.trees)
 
-    if args.i:
+    if args.p or args.P or args.i:
         print_tree(tree, pretty=args.P)
 
+    if args.i:
         try:
             resp = input("\nAre you sure? [Yn] ")
             if not re.match("^(|y|yes|yep)$", resp, flags=re.IGNORECASE):
                 raise SystemExit(1)
-            make_tree(tree, verbose=args.v)
         except KeyboardInterrupt:
             raise SystemExit(1)
 
-    elif args.p:
-        print_tree(tree)
-
-    elif args.P:
-        print_tree(tree, pretty=True)
-
-    else:
-        make_tree(tree, verbose=args.v)
+    make_tree(tree, verbose=args.v)
 
 
 if __name__ == "__main__":
