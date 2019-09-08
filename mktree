@@ -166,10 +166,11 @@ def main():
 
         try:
             resp = input("\nAre you sure? [Yn] ")
-            if re.match("^(|y|yes|yep)$", resp, flags=re.IGNORECASE):
-                make_tree(tree, verbose=args.v)
+            if not re.match("^(|y|yes|yep)$", resp, flags=re.IGNORECASE):
+                raise SystemExit(1)
+            make_tree(tree, verbose=args.v)
         except KeyboardInterrupt:
-            raise SystemExit
+            raise SystemExit(1)
 
     elif args.p:
         print_tree(tree)
