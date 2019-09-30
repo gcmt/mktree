@@ -159,6 +159,8 @@ def main():
 
     if args.p or args.P or args.i:
         print_tree(tree, pretty=args.P)
+        if not args.i:
+            raise SystemExit
 
     if args.i:
         try:
